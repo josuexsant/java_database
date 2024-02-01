@@ -5,10 +5,15 @@ public class CrudOperations {
 
     public static void main(String[] args) {
         createConn = new CreateConnection();
-        performCreate("12.x","Test","Insercion de prueba");
+        // performCreate("12.10","Test","Insercion de prueba");
+        //performRead();
+        //System.out.println("-- Final State --");
         performRead();
-        System.out.println("-- Final State --");
+        performDelete("12.x");
+        performDelete("12.x");
         performRead();
+
+
     }
 
     private static void performCreate(String recipeNumber, String title, String description) {
@@ -54,7 +59,7 @@ public class CrudOperations {
         }
     }
 
-    private static void performUpdate() {
+    private static void performUpdate(String recipeNumber, String title, String description) {
         String sql = "UPDATE RECIPES " +
                 "SET RECIPE_NUMBER = '12-5' " +
                 "WHERE RECIPE_NUMBER = '12-4'";
