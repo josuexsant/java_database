@@ -71,8 +71,9 @@ public class CrudOperations {
         }
     }
 
-    private static void performDelete() {
-        String sql = "DELETE FROM RECIPES WHERE RECIPE_NUMBER = '12-5'";
+    private static void performDelete(String recipeNumber) {
+        //TO-DO Preguntar si conviene dejar asi el delete o si deberiamos usar un PreparedStament
+        String sql = "DELETE FROM RECIPES WHERE RECIPE_NUMBER = '" + recipeNumber + "'";
         try (Connection conn = createConn.getConnection();
              Statement stmt = conn.createStatement();) {
             int result = stmt.executeUpdate(sql);
