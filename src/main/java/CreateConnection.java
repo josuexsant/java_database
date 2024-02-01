@@ -17,7 +17,7 @@ public class CreateConnection {
 
     public CreateConnection() {
         try (InputStream in = Files.newInputStream(FileSystems.getDefault().getPath(System.getProperty("user.dir") +
-                File.separator + "src/main/db_props.properties.properties"));) {
+                File.separator + "src/main/db_props.properties.properties"))) {
             props.load(in);
             in.close();
         } catch (IOException ex) {
