@@ -8,13 +8,11 @@ public class CrudOperations {
         // performCreate("12.10","Test","Insercion de prueba");
         //performRead();
         //System.out.println("-- Final State --");
-
-        read();
-        makeTransactionExample();
+        //read();
+        //makeTransactionExample();
         //insert("12.0","test","sws");
-        read();
-
-
+        //read();
+        showScrollableResults();
     }
 
     private static boolean insert(String recipeNumber, String title, String description) {
@@ -125,5 +123,59 @@ public class CrudOperations {
             ex.printStackTrace();
 
         }
+    }
+
+    private static void showScrollableResults() {
+        String sql = "SELECT ID, RECIPE_NUMBER, RECIPE_NAME, DESCRIPTION " +
+                "FROM RECIPES";
+        try (Connection conn = createConn.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql,
+                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             ResultSet rs = pstmt.executeQuery()) {
+            rs.first();
+            System.out.println(rs.getString(2) + ": " + rs.getString(3) +
+                    " - " + rs.getString(4));
+            rs.next();
+            System.out.println(rs.getString(2) + ": " + rs.getString(3) +
+                    " - " + rs.getString(4));
+            rs.previous();
+            System.out.println(rs.getString(2) + ": " + rs.getString(3) +
+                    " - " + rs.getString(4));
+            rs.last();
+            System.out.println(rs.getString(2) + ": " + rs.getString(3) +
+                    " - " + rs.getString(4));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static void queryAndUpdate(String recipeNumber) {
+        String sql = "SELECT ID, RECIPE_NUMBER, RECIPE_NAME, DESCRIPTION " +
+                "FROM RECIPES " +
+                "WHERE RECIPE_NUMBER = ?";
+        ResultSet rs = null;
+        try (Connection conn = createConn.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+                     ResultSet.CONCUR_UPDATABLE);) {
+            pstmt.setString(1, recipeNumber);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String desc = rs.getString(4);
+                System.out.println("Updating row" + desc);
+                rs.updateString(4, desc + " -- More to come");
+                rs.updateRow();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
     }
 }
