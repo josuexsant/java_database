@@ -8,10 +8,10 @@ public class CrudOperations {
         // performCreate("12.10","Test","Insercion de prueba");
         //performRead();
         //System.out.println("-- Final State --");
-        //makeTransaction();
-        read();
 
-        insert("12.0","test","sws");
+        read();
+        makeTransactionExample();
+        //insert("12.0","test","sws");
         read();
 
 
@@ -24,7 +24,7 @@ public class CrudOperations {
          * Cambiamos los Statement objects por PreparedStament objects
          * Statement stmt = conn.createStatement();) {
          */
-        try (Connection conn = createConn.getConnection();) {
+        try (Connection conn = createConn.getConnection()) {
             try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
                 pstmt.setString(1, recipeNumber);
                 pstmt.setString(2, title);
@@ -100,7 +100,7 @@ public class CrudOperations {
         }
     }
 
-    private static void makeTransaction() {
+    private static void makeTransactionExample() {
         boolean successFlag = false;
         try {
             Connection conn = createConn.getConnection();

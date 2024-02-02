@@ -45,21 +45,4 @@ public class CreateConnection {
         System.out.println("    Successfully connected");
         return conn;
     }
-
-    /**
-     *
-     * @param args
-     *  public static void main(String[] args) {
-     *         CreateConnection createConnection = new CreateConnection();
-     *         try {
-     *             Connection conn = createConnection.getConnection();
-     *             if (conn != null) {
-     *                 System.out.println("Closing Connection...");
-     *                 conn.close();
-     *             }
-     *         } catch (SQLException e) {
-     *             e.printStackTrace();
-     *       }
-     * }
-     */
 }
