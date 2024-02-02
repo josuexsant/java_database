@@ -46,16 +46,20 @@ public class CreateConnection {
         return conn;
     }
 
-    public static void main(String[] args) {
-        CreateConnection createConnection = new CreateConnection();
-        try {
-            Connection conn = createConnection.getConnection();
-            if (conn != null) {
-                System.out.println("Closing Connection...");
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    /**
+     *
+     * @param args
+     *  public static void main(String[] args) {
+     *         CreateConnection createConnection = new CreateConnection();
+     *         try {
+     *             Connection conn = createConnection.getConnection();
+     *             if (conn != null) {
+     *                 System.out.println("Closing Connection...");
+     *                 conn.close();
+     *             }
+     *         } catch (SQLException e) {
+     *             e.printStackTrace();
+     *       }
+     * }
+     */
 }
